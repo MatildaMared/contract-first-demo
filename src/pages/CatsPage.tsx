@@ -15,6 +15,8 @@ function CatsPage() {
 					res.json().then((data) => {
 						if (res.ok) {
 							setCats(data);
+						} else {
+							setError(data.message);
 						}
 					});
 				})
@@ -36,10 +38,10 @@ function CatsPage() {
 				<h1>Cats Page</h1>
 				{loading && <div>Loading...</div>}
 				{error && <p>{error}</p>}
-				<ul>
+				<ul data-testid="cats">
 					{cats &&
 						cats.map((cat) => (
-							<li>
+							<li data-testid="cat" key={cat.id}>
 								<h2>{cat.name}</h2>
 								<p>Age: {cat.age}</p>
 								<p>Breed: {cat.breed}</p>
